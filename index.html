@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Subways of Budapest</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="logo-container">
+  <img src="logo133.png" alt="Logo" id="logo">
+</div>
+
+<div id="main-content" style="display:none;">
+  <div class="container">
+    <div id="screen-menu" class="menu">
+      <div class="card">
+        <h1>Subways of Budapest</h1>
+        <div>Enter your name to begin a new game.</div>
+        <div class="controls">
+          <input id="playerName" type="text" placeholder="Player name">
+          <button id="btnStart" class="btn">Start Game</button>
+          <button id="btnRules" class="btn" style="background:#5b3e8f">Rules</button>
+        </div>
+        <div class="small" style="margin-top:6px">Tip: you can skip building and draw the next card at any time.</div>
+        <h3 style="margin:18px 0 8px">Previous results</h3>
+        <table class="scores" id="scoreTable">
+          <thead><tr><th>#</th><th>Name</th><th>Score</th><th>Time</th><th>Date</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-rules" class="menu" style="display:none">
+  <div class="card" style="max-width:900px">
+    <h2>Rules (short)</h2>
+    <ul>
+      <li>4 rounds, one per metro line (order randomized).</li>
+      <li>Each turn: flip a station card (A/B/C/D/Joker). Building one segment is optional.</li>
+      <li>First segment starts at the line's start station. Later segments must start from a current endpoint.</li>
+      <li>Segments must be straight or 45° diagonal; they cannot pass through stations, cross other segments, or duplicate an existing pair.</li>
+      <li>Deák tér (ID 30) is a Joker station and accepts any letter.</li>
+      <li>Round ends after the 8th drawn card. Total of 4 rounds.</li>
+      <li>Scoring per round: FP = (PK × PM) + PD. Final = Sum(FP) + Railway slider + Junctions.</li>
+    </ul>
+    <div class="controls"><button id="btnBackMenu" class="btn">Back</button></div>
+  </div>
+</div>
+
+<div id="screen-game" style="display:none">
+  <div class="topbar">
+    <div class="badge">
+
+      <span><strong id="who"></strong></span>
+    </div>
+    <div class="badge">
+      <span> <span id="timer">00:00</span></span>
+    </div>
+  </div>
+  <div class="game">
+    <div class="gridwrap">
+      <div class="badge" style="margin-bottom:8px">
+        <span class="dot" id="lineDot"></span>
+        <span id="lineName"></span>
+      </div>
+      <div id="board" class="board">
+        <svg class="lines" viewBox="0 0 700 700" preserveAspectRatio="none">
+          <g id="linesLayer"></g>
+        </svg>
+      </div>
+      <footer>Build straight or 45° diagonal segments. Click a highlighted station to place a segment. Use buttons to draw next card or end the round after 8 cards.</footer>
+    </div>
+
+    <div class="panel">
+      <div><strong>Deck</strong></div>
+      <div class="cards">
+        <div class="cardView"><span id="cardFace">?</span><span class="sub" id="cardType">—</span></div>
+        <div class="cardView" style="font-size:20px;">
+          <div>Round <span id="roundIdx">1</span>/4</div>
+          <div style="margin-top:6px">Cards drawn: <span id="drawnCount">0</span>/8</div>
+          <div style="margin-top:6px">Railway slider: <span id="railScore">0</span></div>
+          <div class="slider" id="railSlider"></div>
+        </div>
+      </div>
+      <div class="controlsRow">
+        <button id="btnDraw" class="btn">Draw card</button>
+        <button id="btnSkip" class="btn" title="Skip building and draw next card">Skip</button>
+        <button id="btnEndRound" class="btn" style="background:#7b2f2f">End round</button>
+      </div>
+      <div style="margin-top:10px">
+        <div>Round score FP: <strong id="roundScore">0</strong></div>
+        <div class="small">PK districts: <span id="pk">0</span> • PM max in one district: <span id="pm">0</span> • PD Danube crossings: <span id="pd">0</span></div>
+        <div style="margin-top:8px">Sum(FP): <strong id="sumFP">0</strong> • Junctions: <strong id="jx">0</strong> • Final: <strong id="finalScore">0</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
